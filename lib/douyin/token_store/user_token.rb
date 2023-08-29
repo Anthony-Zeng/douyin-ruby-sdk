@@ -7,7 +7,7 @@ module Douyin
 
       def fetch_token
         client.request.post "oauth/refresh_token/", {
-          client_key: client.client_key,
+          client_key: client.app.client_key,
           grant_type: 'refresh_token',
           refresh_token: refresh_token
         }, { "Content-Type" => "application/x-www-form-urlencoded" }
@@ -53,7 +53,7 @@ module Douyin
 
       def fetch_refresh_token
         client.request.post "oauth/renew_refresh_token/", {
-          client_key: client.client_key,
+          client_key: client.app.client_key,
           refresh_token: refresh_token_vals
         }, { "Content-Type": "application/x-www-form-urlencoded" }
       end
