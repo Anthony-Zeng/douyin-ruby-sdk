@@ -60,6 +60,7 @@ module Douyin
       url = URI.join(Douyin.api_base_url, path)
       as = header.delete(:as)
       header['Accept'] = 'application/json'
+      header['Content-Type'] = 'application/json' if header['Content-Type'].blank?
       header_params = header.fetch(:params, {})
       request_uuid = SecureRandom.uuid
       header['X-Request-ID'] = request_uuid
@@ -68,7 +69,9 @@ module Douyin
       if response.status.success?
         handle_response(response, as || :json)
       elsif response.status.server_error?
+        handle_response(response, as || :json)
       else
+        handle_response(response, as || :json)
       end
 
     end
