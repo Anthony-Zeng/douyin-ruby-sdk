@@ -9,7 +9,7 @@ module Douyin
           post 'oauth/userinfo/', {
             access_token: access_token,
             open_id: open_id
-          }
+          }, { 'Content-Type': "application/x-www-form-urlencoded"}
         end
 
       end
