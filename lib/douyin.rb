@@ -8,7 +8,6 @@ require 'douyin/exceptions'
 douyin_lib_path = "#{File.dirname(__FILE__)}/douyin"
 Dir["#{douyin_lib_path}/api/methods/*.rb", "#{douyin_lib_path}/token/*.rb"].each { |path| require path }
 
-require 'douyin/api'
 require 'douyin/api/base'
 require 'douyin/api/app'
 require 'douyin/api/user'
