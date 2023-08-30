@@ -3,6 +3,7 @@
 require_relative "douyin/version"
 require 'redis'
 require 'active_support/all'
+require 'douyin/cipher'
 require 'douyin/config'
 require 'douyin/exceptions'
 douyin_lib_path = "#{File.dirname(__FILE__)}/douyin"

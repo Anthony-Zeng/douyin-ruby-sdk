@@ -5,6 +5,7 @@ module Douyin
   module Api
     class App < Base
 
+      include Douyin::Cipher
       include Methods::App
 
       attr_reader :client_key, :client_secret
