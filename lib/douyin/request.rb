@@ -23,7 +23,9 @@ module Douyin
 
     def delete(path, delete_body, delete_header = {})
       request(path, delete_header) do |url, header|
+        Douyin.logger.info "payload: #{delete_body}"
         params = header.delete(:params)
+        header['Content-Type'] = 'application/json'
         http.headers(header).delete(url, params: params, json: delete_body, ssl_context: ssl_context)
       end
     end
@@ -32,7 +34,17 @@ module Douyin
       request(path, post_header) do |url, header|
         Douyin.logger.info "payload: #{post_body}"
         params = header.delete(:params)
+        header['Content-Type'] = 'application/json'
         http.headers(header).post(url, params: params, json: post_body, ssl_context: ssl_context)
+      end
+    end
+
+    def post_form_urlencoded(path, form_data, post_header = {})
+      request(path, post_header) do |url, header|
+        Douyin.logger.info "payload: #{form_data}"
+        params = header.delete(:params)
+        http.headers(header).post(url, params: params, 
+                                       form: HTTP::FormData::Urlencoded(form_data), ssl_context: ssl_context)
       end
     end
 
@@ -49,7 +61,9 @@ module Douyin
 
     def put(path, put_body, put_header = {})
       request(path, put_header) do |url, header|
+        Douyin.logger.info "payload: #{put_body}"
         params = header.delete(:params)
+        header['Content-Type'] = 'application/json'
         http.headers(header).put(url, params: params, json: put_body, ssl_context: ssl_context)
       end
     end
@@ -60,7 +74,6 @@ module Douyin
       url = URI.join(Douyin.api_base_url, path)
       as = header.delete(:as)
       header['Accept'] = 'application/json'
-      header['Content-Type'] = 'application/json' if header['Content-Type'].blank?
       header_params = header.fetch(:params, {})
       request_uuid = SecureRandom.uuid
       header['X-Request-ID'] = request_uuid

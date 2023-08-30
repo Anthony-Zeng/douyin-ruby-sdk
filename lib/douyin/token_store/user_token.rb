@@ -6,11 +6,11 @@ module Douyin
     class UserToken < Base
 
       def fetch_token
-        client.request.post "oauth/refresh_token/", {
+        client.request.post_form_urlencoded "oauth/refresh_token/", {
           client_key: client.app.client_key,
           grant_type: 'refresh_token',
           refresh_token: refresh_token
-        }, { "Content-Type" => "application/x-www-form-urlencoded" }
+        }
       end
 
       def init_refresh_token(refresh_token, expires_at)
@@ -52,10 +52,10 @@ module Douyin
       end
 
       def fetch_refresh_token
-        client.request.post "oauth/renew_refresh_token/", {
+        client.request.post_form_urlencoded "oauth/renew_refresh_token/", {
           client_key: client.app.client_key,
           refresh_token: refresh_token_vals
-        }, { "Content-Type": "application/x-www-form-urlencoded" }
+        }
       end
 
       def refresh_token_vals

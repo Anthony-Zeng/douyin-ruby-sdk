@@ -6,10 +6,10 @@ module Douyin
     module Methods
       module User
         def user_info
-          post 'oauth/userinfo/', {
+          post_form_urlencoded 'oauth/userinfo/', {
             access_token: access_token,
             open_id: open_id
-          }, { 'Content-Type': "application/x-www-form-urlencoded"}
+          }
         end
 
       end

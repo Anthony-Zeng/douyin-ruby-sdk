@@ -16,7 +16,7 @@ module Douyin
           client_secret: client.client_secret,
           grant_type: 'client_credential',
           client_key: client.client_key
-        }, { 'Content-Type' => 'application/json' }
+        }
       end
 
       def token_key
