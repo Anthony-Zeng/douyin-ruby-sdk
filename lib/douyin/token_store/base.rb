@@ -37,7 +37,7 @@ module Douyin
       private
 
       def redis
-        Redis::Alfred
+        Douyin.redis
       end
 
       def redis_key

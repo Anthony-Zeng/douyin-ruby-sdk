@@ -6,9 +6,16 @@ module Douyin
     module Methods
       module App
 
-        def authorize_url(redirect_uri, scope, state = 'douyin', optional_scope = '0')
-          uri = ERB::Util.url_encode(redirect_uri)
-          "https://open.douyin.com/platform/oauth/connect/?client_key=#{client_key}&response_type=code&scope=#{scope}&redirect_uri=#{uri}&state=#{state}&optionalScope=#{optional_scope}"
+        def authorize_url(redirect_uri, scope, state = 'douyin_login', optional_scope = nil)
+          query_params = {
+            client_key: client_key,
+            response_type: 'code',
+            scope: scope,
+            redirect_uri: ERB::Util.url_encode(redirect_uri),
+            state: state,
+            optional_scope: optional_scope
+          }.compact.to_param
+          "https://open.douyin.com/platform/oauth/connect/?#{query_params}"
         end
 
         def get_auth_info(code)
